@@ -1,5 +1,5 @@
 {
-  "name": "ez-stream-relay",
+  "name": "porras-club",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,6 +18,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.2",
     "morgan": "^1.10.0",
+    "pm2": "^5.2.2",
     "socket.io": "^4.4.1",
     "uuid": "^8.3.2"
   },
