@@ -7,9 +7,9 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <span>
+        <h1>
           porras homepage
-        </span>
+        </h1>
 
         <AppList />
       </Router>
