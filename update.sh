@@ -1,0 +1,1 @@
+git pull; bash build.sh; pm2 restart porras-club
