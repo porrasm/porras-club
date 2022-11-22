@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
+import { AppList } from './AppList'
 
 function App() {
   return (
@@ -9,6 +10,8 @@ function App() {
         <span>
           porras homepage
         </span>
+
+        <AppList />
       </Router>
     </div>
   )
