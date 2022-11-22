@@ -107,3 +107,57 @@ const mirrorComponent = (comp: JSX.Element) => {
 
   </div>
 }
+
+type RPSChoice = "rock" | "paper" | "scissors"
+export const RockPaperScissors = () => {
+  // rock paper scissors ai
+  const [hardMode, setHardMode] = useState(false)
+  const [winText, setWintext] = useState("Play against AI! (Neural Network)")
+
+  const [playerScore, setPlayerScore] = useState(0)
+  const [aiScore, setAiScore] = useState(0)
+
+  const randomChoice = () => {
+    const choices = ["rock", "paper", "scissors"] as RPSChoice[]
+    const randomIndex = Math.floor(Math.random() * choices.length)
+    return choices[randomIndex]
+  }
+  const getWinningChoice = (choice: RPSChoice) => {
+    switch (choice) {
+      case "rock":
+        return "paper"
+      case "paper":
+        return "scissors"
+      case "scissors":
+        return "rock"
+    }
+  }
+
+  const isWinningChoice = (playerChoice: RPSChoice, aiChoice: RPSChoice) => {
+    return getWinningChoice(playerChoice) === aiChoice
+  }
+
+  const play = (choice: RPSChoice) => {
+    const aiChoice = hardMode ? getWinningChoice(choice) : randomChoice()
+
+    const isWin = isWinningChoice(choice, aiChoice)
+
+    if (isWin) {
+      setPlayerScore(playerScore + 1)
+      setWintext("You win! AI chose " + aiChoice)
+    } else {
+      setAiScore(aiScore + 1)
+      setWintext("You lose! AI chose " + aiChoice)
+    }
+  }
+
+  return <div style={{ "display": "flex", "flexDirection": "column" }}>
+    <span>rock paper scissors</span>
+    <span>{winText}</span>
+    <span>Your score: {playerScore}, AI score: {aiScore}</span>
+    <button onClick={() => play("rock")}>rock</button>
+    <button onClick={() => play("paper")}>paper</button>
+    <button onClick={() => play("scissors")}>scissors</button>
+    <button onClick={() => setHardMode(!hardMode)}>toggle hard mode, currently: {hardMode ? "hard" : "easy"}</button>
+  </div>
+}
