@@ -133,21 +133,29 @@ export const RockPaperScissors = () => {
     }
   }
 
-  const isWinningChoice = (playerChoice: RPSChoice, aiChoice: RPSChoice) => {
-    return getWinningChoice(playerChoice) === aiChoice
+  const getResult = (playerChoice: RPSChoice, aiChoice: RPSChoice) => {
+    if (playerChoice === aiChoice) {
+      return 0
+    } else if (aiChoice === getWinningChoice(playerChoice)) {
+      return -1
+    } else {
+      return 1
+    }
   }
 
   const play = (choice: RPSChoice) => {
     const aiChoice = hardMode ? getWinningChoice(choice) : randomChoice()
 
-    const isWin = isWinningChoice(choice, aiChoice)
+    const result = getResult(choice, aiChoice)
 
-    if (isWin) {
+    if (result === 1) {
       setPlayerScore(playerScore + 1)
       setWintext("You win! AI chose " + aiChoice)
-    } else {
+    } else if (result === -1) {
       setAiScore(aiScore + 1)
       setWintext("You lose! AI chose " + aiChoice)
+    } else {
+      setWintext("Tie! AI chose " + aiChoice)
     }
   }
 

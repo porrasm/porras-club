@@ -12,9 +12,6 @@ const verFlip: React.CSSProperties = {
   transform: "scaleY(-1)"
 }
 
-
-
-
 export const AppList = () => {
   const [apps, setApps] = useState<SApp[]>([
     {
