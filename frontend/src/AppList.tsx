@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Calculator, InfiniteLoop, RockPaperScissors } from "./infiniteLoopp"
 
 type SApp = {
@@ -13,6 +13,15 @@ const verFlip: React.CSSProperties = {
 }
 
 export const AppList = () => {
+  const [timeText, setTimeText] = useState("")
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeText(new Date().toLocaleTimeString() + " (in milliseconds: " + new Date().getTime())
+    }, 1)
+    return () => clearInterval(interval)
+  }, [])
+
   const [apps, setApps] = useState<SApp[]>([
     {
       name: "streaming service (better than discord)",
@@ -68,6 +77,7 @@ export const AppList = () => {
       {currentApp ? <button onClick={() => setCurrentApp(undefined)}>go backk</button> : <span>select app from list above</span>}
       {"<br\\>"}
     </div>
+    <h2>Time of day: {timeText}</h2>
     <h2>Site information</h2>
     <a href="https://github.com/porrasm/porras-club">Github</a>
     <h3>Tech</h3>
