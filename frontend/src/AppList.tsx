@@ -54,7 +54,7 @@ export const AppList = () => {
     }
   }
 
-  return <div style={flip ? verFlip : { "backgroundColor": "green", "height": "100vh" }}>
+  return <div style={flip ? verFlip : { "backgroundColor": "green", "height": "100vh", "overflow": "scroll" }}>
     <h2>
       Apps list (click to open), different useful tools. all tools programmed by me. homepage: www.porras.club/club
     </h2>
@@ -70,22 +70,22 @@ export const AppList = () => {
     <h2>Site information</h2>
     <a href="https://github.com/porrasm/porras-club">Github</a>
     <h3>Tech</h3>
-    <span>React engine (most recent edition)</span>
-    <span>Node.js (server)</span>
-    <span>Express (server)</span>
-    <span>Typescript (frontend)</span>
-    <span>Javascript (frontend backend)</span>
-    <span>CI & Automation: (bash script for build)</span>
-    <span>Version control: (Gitlab)</span>
-    <span>HTML (frontend)</span>
-    <span>CSS (frontend)</span>
-    <span>JSX (frontend)</span>
-    <span>React (frontend)</span>
-    <span>React router (frontend)</span>
-    <span>React hooks (frontend)</span>
-    <span>React router (frontend)</span>
-    <span>Data format: (JSON)</span>
-    <span>OS: Linus</span>
-    <span>Hosting: Self hosted on rented machnine</span>
+    <span>React engine (most recent edition)</span><br/>
+    <span>Node.js (server)</span><br/>
+    <span>Express (server)</span><br/>
+    <span>Typescript (frontend)</span><br/>
+    <span>Javascript (frontend backend)</span><br/>
+    <span>CI & Automation: (bash script for build)</span><br/>
+    <span>Version control: (Gitlab)</span><br/>
+    <span>HTML (frontend)</span><br/>
+    <span>CSS (frontend)</span><br/>
+    <span>JSX (frontend)</span><br/>
+    <span>React (frontend)</span><br/>
+    <span>React router (frontend)</span><br/>
+    <span>React hooks (frontend)</span><br/>
+    <span>React router (frontend)</span><br/>
+    <span>Data format: (JSON)</span><br/>
+    <span>OS: Linus</span><br/>
+    <span>Hosting: Self hosted on rented machnine</span><br/>
   </div>
 }
