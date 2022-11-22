@@ -1,4 +1,24 @@
 import { useState } from "react"
+import cx from "classnames"
+import styles from "./styles.module.scss"
+
+const style: React.CSSProperties = {
+  position: "fixed",
+  bottom: "0px",
+  left: "50%",
+  maxWidth: '450px',
+  zIndex: 1,
+  transform: "tras",
+}
+
+const horFlip: React.CSSProperties = {
+  transform: "scaleX(-1)"
+}
+
+const verFlip: React.CSSProperties = {
+  transform: "scaleY(-1)"
+}
+
 
 export const InfiniteLoop = () => {
   const loop = () => {
@@ -26,6 +46,7 @@ export const Calculator = () => {
   const [a, setA] = useState("")
   const [b, setB] = useState("")
   const [c, setC] = useState("")
+  const [flipV, setFlipV] = useState(false)
 
   const plus = () => {
     setC(a + b)
@@ -39,27 +60,50 @@ export const Calculator = () => {
     setC(a.split("").map(l => b + l).join(""))
   }
   const divide = () => {
-    try {
-      setC((Number(a) / Number(b)).toString())
-    } catch (e) {
-      setC("error (divide by 0)")
-    }
+    setC("error (divide by 0)")
   }
 
   const flip = () => {
-    const temp = a
-    setA(b)
-    setB(temp)
+    setFlipV(!flipV)
+    setA(upsideDownText(a))
+    setB(upsideDownText(b))
+    setC(upsideDownText(c))
   }
 
-  return <div>
-    <input value={a} onChange={e => setA(e.target.value)} />
-    <input value={b} onChange={e => setB(e.target.value)} />
-    <button onClick={plus}>+</button>
-    <button onClick={minus}>-</button>
-    <button onClick={times}>*</button>
-    <button onClick={divide}>/</button>
-    <button onClick={flip}>flippe:</button>
-    <span>Resulte: {c}</span>
+  function upsideDownText(srcText: string) {
+    let out = '';
+    for (var i = srcText.length - 1; i >= 0; --i) {
+      var ch = srcText.charAt(i);
+      if (ch == 'a') {
+        out += '\u0250'
+      } else if (ch == 'b') {
+        out += 'q'
+      } else if (ch == 'c') {
+        out += '\u0254'
+        // etc....
+      } else {
+        out += ch
+      }
+    }
+
+    return out;
+  }
+
+  return <div style={flipV ? horFlip : {}} >
+    <input style={flipV ? verFlip : {}} value={a} onChange={e => setA(e.target.value)} />
+    <input style={flipV ? horFlip : {}} value={b} onChange={e => setB(e.target.value)} />
+    <button style={flipV ? verFlip : {}} onClick={plus}>+</button>
+    <button style={flipV ? horFlip : {}} onClick={minus}>-</button>
+    <button style={flipV ? verFlip : {}} onClick={times}>*</button>
+    <button style={flipV ? horFlip : {}} onClick={divide}>/</button>
+    <button style={flipV ? verFlip : {}} onClick={flip}>flippe:</button>
+    <span style={flipV ? horFlip : {}} className={cx(flipV && styles.flipHorizontal)}>Resulte: {c}</span>
+  </div>
+}
+
+const mirrorComponent = (comp: JSX.Element) => {
+  // turn comp upside down css
+  <div>
+
   </div>
 }
