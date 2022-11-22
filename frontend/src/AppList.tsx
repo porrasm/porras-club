@@ -51,7 +51,7 @@ export const AppList = () => {
   }
 
   return <div style={flip ? verFlip : {}}>
-    <div style={{ "display": "flex", "flexDirection": "column" }}>
+    <div style={{ "display": "flex", "flexDirection": "column", "backgroundImage": "url(/background.png)" }}>
       {"<br\\>"}
       <span>apps list {"(server functionelity); "}</span>
       {"<br\\>"}
