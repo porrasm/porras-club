@@ -7,7 +7,11 @@ const maxUsernameLength = 25
 export const ChatView = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [message, setMessage] = useState("")
-  const [username, setUsername] = useState("")
+  const username = localStorage.getItem("username") || ""
+
+  const setUsername = (u: string) => {
+    localStorage.setItem("username", u)
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,7 +38,7 @@ export const ChatView = () => {
     getChatMessages().then(setMessages)
   }
 
-  return <div style={{ "display": "flex", "flexDirection": "column", "width": "25vh", "height": "25vh", "overflow": "auto" }}>
+  return <div style={{ "display": "flex", "flexDirection": "column", "width": "25vh", "height": "25vh", "overflow": "auto", "margin": "auto" }}>
     <span>chat</span>
     <div style={{ "display": "flex", "flexDirection": "column" }}>
       {messages.map((message, index) => <div key={index}>
