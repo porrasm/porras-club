@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Calculator, InfiniteLoop, RockPaperScissors } from "./infiniteLoopp"
+import { Calculator, InfiniteLoop, PasswordManager, RockPaperScissors } from "./infiniteLoopp"
 
 type SApp = {
   name: string
@@ -18,7 +18,7 @@ export const AppList = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeText(new Date().toLocaleTimeString() + " (in milliseconds: " + new Date().getTime())
-    }, 1)
+    }, 100)
     return () => clearInterval(interval)
   }, [])
 
@@ -28,7 +28,7 @@ export const AppList = () => {
       redirect: "http://video.porras.club"
     },
     {
-      name: "youtube",
+      name: "youtube channel",
       redirect: "https://www.youtube.com/@porrasm"
     },
     {
@@ -42,6 +42,10 @@ export const AppList = () => {
     {
       name: "Rock paper & scissors",
       component: () => <RockPaperScissors />
+    },
+    {
+      name: "password manager",
+      component: () => <PasswordManager />
     },
     {
       name: "austria mode (for view in new zeland)",

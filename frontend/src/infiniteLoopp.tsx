@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import cx from "classnames"
 import styles from "./styles.module.scss"
+import { getPasswords, PasswordForService, savePassword } from "./api"
 
 const style: React.CSSProperties = {
   position: "fixed",
@@ -167,5 +168,46 @@ export const RockPaperScissors = () => {
     <button onClick={() => play("paper")}>paper</button>
     <button onClick={() => play("scissors")}>scissors</button>
     <button onClick={() => setHardMode(!hardMode)}>toggle hard mode, currently: {hardMode ? "hard" : "easy"}</button>
+  </div>
+}
+
+export const PasswordManager = () => {
+  const [passwords, setPasswords] = useState<PasswordForService[]>([])
+  useEffect(() => {
+    getPasswords().then(p => setPasswords(p))
+  }, [])
+
+  const [newService, setNewService] = useState("")
+  const [newLogin, setNewLogin] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+
+  const addPassword = () => {
+    const newPass = { service: newService, login: newLogin, password: newPassword, id: -1 }
+    savePassword(newPass)
+    setPasswords([...passwords, newPass])
+    setNewService("")
+    setNewLogin("")
+    setNewPassword("")
+  }
+
+  const deletePassword = (id: number) => {
+    deletePassword(id)
+    setPasswords(passwords.filter(p => p.id !== id))
+  }
+
+  return <div>
+    <span>password manager</span>
+    <input value={newService} onChange={e => setNewService(e.target.value)} placeholder="service" />
+    <input value={newLogin} onChange={e => setNewLogin(e.target.value)} placeholder="login" />
+    <input value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="password" />
+    <button onClick={addPassword}>add password</button>
+
+    <h2>Existing</h2>
+    {passwords.map(p => <div key={p.id} style={{ "display": "flex", "flexDirection": "column" }}>
+      <span>Service: {p.service}</span>
+      <span>Login: {p.login}</span>
+      <span>Password: {p.password}</span>
+      <button onClick={() => deletePassword(p.id)}>delete</button>
+    </div>)}
   </div>
 }
