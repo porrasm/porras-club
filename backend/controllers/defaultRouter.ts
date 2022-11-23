@@ -2,6 +2,8 @@ import { Router } from 'express'
 
 const router = Router()
 
+
+
 type PasswordForService = {
     id: number
     service: string
@@ -52,6 +54,38 @@ router.delete('/passwords', async (req, res) => {
     const newPasswords = passwords.filter((password) => password.id !== id)
     savePasswords(newPasswords)
     return res.json({ hello: "world" })
+})
+
+type ChatMessage = {
+    username: string
+    message: string
+}
+
+const CHAT_MSG_LENGTH = 100
+const CHAT_HISTORY_SIZE = 100
+const chatHistory: ChatMessage[] = []
+
+router.get('/chat', async (req, res) => {
+    return res.json(chatHistory)
+})
+
+router.post('/chat', async (req, res) => {
+    const username = "" + req.query.username
+    const message = "" + req.query.message
+
+    if (username.length > 25) {
+        return res.json({ error: "username too long" })
+    }
+    if (message.length > CHAT_MSG_LENGTH) {
+        return res.json({ error: "message too long" })
+    }
+
+    chatHistory.push({ username, message })
+    if (chatHistory.length > CHAT_HISTORY_SIZE) {
+        chatHistory.shift()
+    }
+
+    return res.status(200)
 })
 
 export default router;

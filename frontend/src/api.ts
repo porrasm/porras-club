@@ -7,6 +7,11 @@ export type PasswordForService = {
   password: string
 }
 
+export type ChatMessage = {
+  username: string
+  message: string
+}
+
 const baseUrl = "/api"
 
 export const getPasswords = async (): Promise<PasswordForService[]> => {
@@ -21,4 +26,13 @@ export const savePassword = async (pass: PasswordForService) => {
 
 export const deletePassword = async (id: number) => {
   await axios.delete(baseUrl + "/passwords", { params: { id } })
+}
+
+export const getChatMessages = async (): Promise<ChatMessage[]> => {
+  const response = await axios.get(baseUrl + "/chat")
+  return response.data
+}
+
+export const sendChatMessage = async (msg: ChatMessage) => {
+  await axios.post(baseUrl + "/chat", {}, { params: msg })
 }

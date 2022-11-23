@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { ChatView } from "./Chat"
 import { Calculator, InfiniteLoop, PasswordManager, RockPaperScissors } from "./infiniteLoopp"
 
 type SApp = {
@@ -81,6 +82,8 @@ export const AppList = () => {
       {currentApp ? <button onClick={() => setCurrentApp(undefined)}>go backk</button> : <span>select app from list above</span>}
       {"<br\\>"}
     </div>
+    <h2>Chat</h2>
+    <ChatView />
     <h2>Time of day: {timeText}</h2>
     <h2>Site information</h2>
     <a href="https://github.com/porrasm/porras-club">Github</a>
